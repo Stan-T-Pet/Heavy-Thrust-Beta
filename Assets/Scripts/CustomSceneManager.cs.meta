@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7f5d9a45b68f4d645b39c42edca6607c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - soundSource: {instanceID: 0}
+  - loseBGM: {fileID: 8300000, guid: 52b49401bd644e042a3fe5df91fce625, type: 3}
+  - winBGM: {fileID: 8300000, guid: a2e4febf006d5ae4b9eed3a8c52542da, type: 3}
+  - menuBGM: {fileID: 8300000, guid: d0196213020431d4687bdc7efae71aaf, type: 3}
+  - LV1: {fileID: 8300000, guid: b51ba43320f6cb7439963c88046bb74c, type: 3}
+  - LV2: {fileID: 8300000, guid: b9e47cb8160579a468a72600429e6333, type: 3}
+  - LV3: {fileID: 8300000, guid: a126a8019a3ba474f9e57700eb11e532, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
