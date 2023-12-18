@@ -6,32 +6,32 @@ using System.Diagnostics;
 
 public class PlayerController : MonoBehaviour
 {
-    // Keyboard inputs
+    //keyboard inputs
     private float horizontalInput;
     private float verticalInput;
     private float ascentInput;
 
     public float mouseSensitivity = 100.0f;
 
-    // Player boundary
-    private float speed = 25.0f; // Player speed
+    //player boundary
+    private float speed = 25.0f; //Player speed
     private Vector3 boundarySize = new Vector3(60, 50, 50);
     public float ascentSpeed = 20.0f;
 
-    // Leaning
-    public float leanAngle = 15.0f; // Max angle for leaning
+    //leaning
+    public float leanAngle = 15.0f; //Max angle for leaning
     public float leanSpeed = 5.0f;
 
-    // Projectile object reference for instantiation
+    //projectile object reference for instantiation
     public GameObject projectilePrefab;
-    public Transform shootingPoint; // Shooting point reference
+    public Transform shootingPoint; //Shooting point reference
     private Rigidbody rigBod;
 
-    // Player life and bullet
+    //player life and bullet
     int reload = 10;
     int bulletCount = 10;
     int maxBullets = 10;
-    public TextMeshProUGUI bulletCounterText; // Assuming you have a UI Text element for displaying bullet count
+    public TextMeshProUGUI bulletCounterText;
 
     //Referring to SpawnManager script
     private SpawnManager spawnManager;
@@ -42,12 +42,12 @@ public class PlayerController : MonoBehaviour
         rigBod = GetComponent<Rigidbody>();
         maxBullets = 10;
         bulletCount = maxBullets;
-        spawnManager = FindObjectOfType<SpawnManager>(); // Find the SpawnManager in the scene
+        spawnManager = FindObjectOfType<SpawnManager>(); //Find the SpawnManager in the scene
         
     }
     void FixedUpdate()
     {
-        UpdateBulletCounterUI();
+        UpdateBulletCounterUI(); //clearing bullet text
     }
 
      void Update()
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         HandleLeaningInput();
         CheckBounds();
         HandleMovementInput();
-        //sssssssssssCheckForNewKills();
+        //CheckForNewKills();
      }
 
     private void HandleMouseInput()
@@ -131,55 +131,55 @@ public class PlayerController : MonoBehaviour
             currentLean = -leanSpeed * Time.deltaTime;
         }
 
-        // Lean rotation around z-axis
+        //Lean rotation around z-axis
         transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z + currentLean);
     }
 
     private void CheckBounds()
     {
-        // Get the player's current position
+        //get the player's current position
         Vector3 currentPosition = transform.position;
 
-        // Clamp the position within the specified boundaries
+        //clamp the position within the specified boundaries
         currentPosition.x = Mathf.Clamp(currentPosition.x, -boundarySize.x, boundarySize.x);
         currentPosition.y = Mathf.Clamp(currentPosition.y, -boundarySize.y, boundarySize.y);
         currentPosition.z = Mathf.Clamp(currentPosition.z, -boundarySize.z, boundarySize.z);
 
-        // Apply the clamped position back to the player
+        //Applying the clamped position back to the player
         transform.position = currentPosition;
     }
 
     private void HandleMovementInput()
     {
-        // Get input from the player
+        //Get input from the player
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
         ascentInput = 0;
 
-        if (Input.GetKey(KeyCode.Space)) // Ascend
+        if (Input.GetKey(KeyCode.Space)) //Ascend
         {
             ascentInput = ascentSpeed;
         }
-        else if (Input.GetKey(KeyCode.LeftShift)) // Descend
+        else if (Input.GetKey(KeyCode.LeftShift)) //Descend
         {
             ascentInput = -ascentSpeed;
         }
 
-        // Calculate movement direction
+        //Calculate movement direction
         Vector3 moveDirection = (transform.forward * verticalInput + transform.right * horizontalInput).normalized;
         Vector3 ascentDirection = new Vector3(0, ascentInput, 0);
 
-        // Increase speed if the "W" key is pressed
+        //Increase speed if the "W" key is pressed
         if (Input.GetKey(KeyCode.W))
         {
-            speed = 20.0f; // Adjust the speed
+            speed = 20.0f; //Adjust the speed
         }
         else
         {
-            speed = 10.0f; // Reset speed to default
+            speed = 10.0f; //Reset speed to default
         }
 
-        // Move the player using Rigidbody
+        //Move the player using Rigidbody
         rigBod.velocity = moveDirection * speed + ascentDirection;
     }
 }

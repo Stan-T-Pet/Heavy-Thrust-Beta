@@ -9,9 +9,10 @@ public class DetectCollisions : MonoBehaviour
 
     void FixedUpdate()
     {
-        UpdatePlayerLifeUI();
+        UpdatePlayerLifeUI();//clearing life text on scene load
     }
 
+    //
     private void OnTriggerEnter(Collider other)
     {
         if (gameObject.CompareTag("Player"))
@@ -32,11 +33,11 @@ public class DetectCollisions : MonoBehaviour
 
     private void HandleEnemyBulletCollision()
     {
-        lifeCounter--;
+        lifeCounter--;//decrease life value
 
         UpdatePlayerLifeUI();
 
-        if (lifeCounter <= 0)
+        if (lifeCounter <= 0)//checking if player is DEAD!!!
         {
             UnityEngine.Debug.Log("Lose");
             SceneManager.LoadScene("Lose");
@@ -45,6 +46,7 @@ public class DetectCollisions : MonoBehaviour
 
     private void HandlePlayerBulletCollision()
     {
+        //find spawn manager and collect number of Enemies killed to be used for reload check
         FindObjectOfType<SpawnManager>().EnemyKilled();
         Destroy(gameObject);
     }
@@ -53,7 +55,7 @@ public class DetectCollisions : MonoBehaviour
     {
         if (playerLifeText != null)
         {
-            playerLifeText.text = "LIFE: " + Mathf.Max(lifeCounter, 0).ToString();
+            playerLifeText.text = "LIFE: " + Mathf.Max(lifeCounter, 0).ToString();//update player life text
         }
     }
 }

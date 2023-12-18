@@ -57,8 +57,9 @@ public class CustomSceneManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        //storing next scene using indexes, this current index pluse 1 is value of next
         int nextIndex = (currentSceneIndex + currentSceneIndex++) % sceneNames.Length;
-        if (nextIndex >= 1 && nextIndex <= 3)
+        if (nextIndex >= 1 && nextIndex <= 3) //checking index is within range
         {
             // If the next scene is a level, load it
             LoadSceneAtIndex(nextIndex);

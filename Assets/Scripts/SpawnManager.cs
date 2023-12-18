@@ -17,19 +17,20 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        // Find scene name
+        //Find scene name
         CheckCurrentSceneName();
 
-        // Start spawning enemies repeatedly after an initial delay
+        //Start spawning enemies repeatedly after an initial delay
         InvokeRepeating("SpawnEnemy", spawnInterval, spawnInterval);
     }
 
     void Update()
     {
-        VictoryCheck();
+        VictoryCheck(); //
         SecondPhase(); // Call the SecondPhase method in the Update loop
     }
 
+    //find current scene;s name and if its different reset spawnMax
     void CheckCurrentSceneName()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
